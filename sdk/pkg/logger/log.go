@@ -7,6 +7,7 @@ import (
 	"github.com/go-admin-team/go-admin-core/debug/writer"
 	"github.com/go-admin-team/go-admin-core/logger"
 	"github.com/go-admin-team/go-admin-core/plugins/logger/zap"
+
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
 
 	log "github.com/go-admin-team/go-admin-core/logger"
@@ -46,7 +47,7 @@ func SetupLogger(opts ...Option) logger.Logger {
 
 	switch op.driver {
 	case "zap":
-		log.DefaultLogger, err = zap.NewLogger(logger.WithLevel(level), logger.WithOutput(output), zap.WithCallerSkip(2))
+		log.DefaultLogger, err = zap.NewLogger(logger.WithLevel(level), zap.WithOutput(output), zap.WithCallerSkip(2))
 		if err != nil {
 			log.Fatalf("new zap logger error, %s", err.Error())
 		}
