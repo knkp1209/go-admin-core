@@ -53,9 +53,10 @@ func (l *zaplog) Init(opts ...logger.Option) error {
 		zapConfig.Level.SetLevel(loggerToZapLevel(l.opts.Level))
 	}
 	zapConfig.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	zapConfig.EncoderConfig.TimeKey = "@timestamp"
 
 	logCore := zapcore.NewCore(
-		zapcore.NewConsoleEncoder(zapConfig.EncoderConfig),
+		zapcore.NewJSONEncoder(zapConfig.EncoderConfig),
 		zapcore.NewMultiWriteSyncer(zapcore.AddSync(writer)),
 		zapConfig.Level)
 
